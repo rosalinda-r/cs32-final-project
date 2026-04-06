@@ -1,0 +1,36 @@
+import random
+from socket32 import create_new_socket
+
+HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+
+def main():
+    with create_new_socket() as s:
+        # Bind socket to address and publish contact info
+        s.bind(HOST, PORT)
+        s.listen()
+        print("ROSHAMBO! server started. Listening on", (HOST, PORT))
+        possibility = ['rock', 'paper', 'scissors']
+
+        # Answer incoming connection
+        conn2client, addr = s.accept()
+        print('Connected by', addr)
+
+        with conn2client:
+            while True:   # message processing loop
+                shape = conn2client.recv()
+                if shape == '':
+                    break
+                shape = str(shape)
+
+                # Generate a random shape to send back to client
+                # Create a secret for this connection
+                option = random.choice(possibility)
+                conn2client.sendall(option)
+
+
+
+            print('Disconnected')
+
+if __name__ == '__main__':
+    main()
