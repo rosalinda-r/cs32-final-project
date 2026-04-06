@@ -21,6 +21,7 @@ while wrong_guesses < max_wrong and "_" in display_word:
     print("Guessed letters:", guessed_letters)
     print("Wrong guesses left:", max_wrong - wrong_guesses)
 
+#Inputs
     guess = input("Guess a letter: ").lower()
 
     # Check input
