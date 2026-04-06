@@ -13,7 +13,7 @@ def main():
             # Grab a guess from the player
         while True:
             guess = str(input('Please pick your letter: '))
-            if guess in ['rock', 'paper', 'scissors']:
+            if guess :
                 break
             else:
                 print('')
