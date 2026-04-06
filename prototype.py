@@ -1,4 +1,4 @@
-##Single Player Hangman Game
+5##Single Player Hangman Game
 import random
 ##Create Words List
 words = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
