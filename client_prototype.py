@@ -16,7 +16,7 @@ def main():
             if guess in ['rock', 'paper', 'scissors']:
                 break
             else:
-                print('Shape must be rock, paper, or scissors. Try again...')
+                print('')
 
         s.sendall(guess)
         computer = s.recv()
