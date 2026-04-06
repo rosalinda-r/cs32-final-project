@@ -10,7 +10,7 @@ def main():
         s.bind(HOST, PORT)
         s.listen()
         print("HANGMAN! server started. Listening on", (HOST, PORT))
-        possibility = ['rock', 'paper', 'scissors']
+        possibility = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', ]
 
         # Answer incoming connection
         conn2client, addr = s.accept()
