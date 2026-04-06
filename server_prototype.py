@@ -21,7 +21,7 @@ def main():
                 choice = conn2client.recv()
                 if choice == '':
                     break
-                choice = str(shape)
+                choice = str(choice)
 
                 # Generate a random shape to send back to client
                 # Create a secret for this connection
