@@ -10,7 +10,7 @@ def main():
         s.bind(HOST, PORT)
         s.listen()
         print("HANGMAN! server started. Listening on", (HOST, PORT))
-        possibility = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
+        words = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
 
         # Answer incoming connection
         conn2client, addr = s.accept()
@@ -18,14 +18,14 @@ def main():
 
         with conn2client:
             while True:   # message processing loop
-                shape = conn2client.recv()
-                if shape == '':
+                choice = conn2client.recv()
+                if choice == '':
                     break
-                shape = str(shape)
+                choice = str(shape)
 
                 # Generate a random shape to send back to client
                 # Create a secret for this connection
-                option = random.choice(possibility)
+                option = random.choice(words)
                 conn2client.sendall(option)
 
 
