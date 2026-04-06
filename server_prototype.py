@@ -9,7 +9,7 @@ def main():
         # Bind socket to address and publish contact info
         s.bind(HOST, PORT)
         s.listen()
-        print("ROSHAMBO! server started. Listening on", (HOST, PORT))
+        print("HANGMAN! server started. Listening on", (HOST, PORT))
         possibility = ['rock', 'paper', 'scissors']
 
         # Answer incoming connection
