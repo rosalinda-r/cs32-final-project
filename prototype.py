@@ -14,7 +14,7 @@ max_wrong = 6
 # Display word with blanks
 display_word = ["_"] * len(word)
 
-print("Welcome to Hangman!")
+print("WELCOME TO HANGMAN!")
 
 while wrong_guesses < max_wrong and "_" in display_word:
     print("\nWord: " + " ".join(display_word))
