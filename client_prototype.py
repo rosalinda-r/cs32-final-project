@@ -4,7 +4,7 @@ HOST = '127.0.0.1'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 def main():
-    print('## Welcome to ROSHAMBO! ##')
+    print('## WELCOME TO HANGMAN! ##')
 
     with create_new_socket() as s:
         s.connect(HOST, PORT)
@@ -12,7 +12,7 @@ def main():
 
             # Grab a guess from the player
         while True:
-            shape = str(input('Please pick your shape: '))
+            shape = str(input('Please pick your letter: '))
             if shape in ['rock', 'paper', 'scissors']:
                 break
             else:
