@@ -12,20 +12,20 @@ def main():
 
             # Grab a guess from the player
         while True:
-            shape = str(input('Please pick your letter: '))
-            if shape in ['rock', 'paper', 'scissors']:
+            guess = str(input('Please pick your letter: '))
+            if guess in ['rock', 'paper', 'scissors']:
                 break
             else:
                 print('Shape must be rock, paper, or scissors. Try again...')
 
-        s.sendall(shape)
+        s.sendall(guess)
         computer = s.recv()
-        print(f"You: {shape}   Computer: {computer}")
+        print(f"You: {guess}   Computer: {computer}")
 
-        if shape == computer:
+        if guess == computer:
             print("It's a tie!")
 
-        elif shape == 'rock':
+        elif guess == 'rock':
             if computer == 'scissors':
                 print('You win!')
 
