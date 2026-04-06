@@ -9,7 +9,7 @@ def main():
         # Bind socket to address and publish contact info
         s.bind(HOST, PORT)
         s.listen()
-        print("HANGMAN! server started. Listening on", (HOST, PORT))
+        print("HANGMAN server started. Listening on", (HOST, PORT))
         words = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
 
         # Answer incoming connection
@@ -18,10 +18,10 @@ def main():
 
         with conn2client:
             while True:   # message processing loop
-                choice = conn2client.recv()
-                if choice == '':
+                word = conn2client.recv()
+                if word == '':
                     break
-                choice = str(words)
+                word = str(words)
 
                 # Generate a random shape to send back to client
                 # Create a secret for this connection
