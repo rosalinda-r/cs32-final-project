@@ -3,7 +3,7 @@
 ##Create Words List
 words = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
 def main():
-    print('## WELCOME TO HANGMAN! ## \n')
+    print('## WELCOME TO HANGMAN! ## \nPress ENTER to START')
 
 # Grab a guess from the player
         while True:
