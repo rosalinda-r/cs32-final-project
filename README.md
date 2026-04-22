@@ -13,4 +13,6 @@ We also want to expand our ability to generate visuals by including a graphical 
 4. Loop the game until the player either wins or loses
 
 ## Breaking it Down - FP
-1. 
+1.
+
+## 
