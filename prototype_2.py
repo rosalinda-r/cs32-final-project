@@ -3,20 +3,24 @@ import requests
 
 # Get a random Wikipedia page
 url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
-response = requests.get(url)
+
+headers = {
+    "User-Agent": "HangmanProject/1.0 (student project)"
+}
+
+response = requests.get(url, headers=headers)
 
 if response.status_code != 200:
     print("Error fetching data:", response.status_code)
+    print(response.text[:200])
     exit()
 
 try:
     data = response.json()
 except requests.exceptions.JSONDecodeError:
     print("Invalid response from Wikipedia")
-    print(response.text)  # helps debug
+    print(response.text)
     exit()
-
-data = response.json()
 
 # Extract the title and store it in 'guess'
 title = data["title"]
