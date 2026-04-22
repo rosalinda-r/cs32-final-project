@@ -11,3 +11,5 @@ We also want to expand our ability to generate visuals by including a graphical 
 2. Take a player's guess for each letter in the word, one at a time
 3. Update the visual display based on whether the guess is correct or incorrect
 4. Loop the game until the player either wins or loses
+
+##Breaking it Down - FP 
