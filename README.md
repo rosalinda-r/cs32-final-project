@@ -9,7 +9,8 @@ Add to your README.md a description of what your project does and instructions f
 
 ## Breaking it Down - FP
 1. Run using: python3 prototype_2.py
-2. 'Scrape' a random wikipedia article, using 
+2. 'Scrape' a random wikipedia article, using wikipedia's built-in random URL
+3. Extract and clean up the title by removing the 
 
 
 ## Breaking it Down(old)
