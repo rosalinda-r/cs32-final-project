@@ -1,4 +1,4 @@
-import random
+import re
 import requests
 
 # Get a random Wikipedia page
@@ -8,7 +8,14 @@ response = requests.get(url)
 data = response.json()
 
 # Extract the title and store it in 'guess'
-word = data["title"]
+title = data["title"]
+
+word = title.lower()
+
+display = [
+    "_" if char.isalpha() else char
+    for char in word
+]
 
 hangman_stages = [
     """
