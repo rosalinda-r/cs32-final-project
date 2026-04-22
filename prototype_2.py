@@ -5,6 +5,17 @@ import requests
 url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
 response = requests.get(url)
 
+if response.status_code != 200:
+    print("Error fetching data:", response.status_code)
+    exit()
+
+try:
+    data = response.json()
+except requests.exceptions.JSONDecodeError:
+    print("Invalid response from Wikipedia")
+    print(response.text)  # helps debug
+    exit()
+
 data = response.json()
 
 # Extract the title and store it in 'guess'
