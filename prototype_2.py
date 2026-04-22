@@ -22,7 +22,7 @@ except requests.exceptions.JSONDecodeError:
     print(response.text)
     exit()
 
-# Extract the title and store it in 'guess'
+# Extract the title and store it in 'title'
 title = data["title"]
 
 word = title.lower()
