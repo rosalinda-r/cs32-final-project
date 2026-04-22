@@ -1,6 +1,14 @@
 import random
+import requests
 
-words = ["apple", "tiger", "python", "school", "planet"]
+# Get a random Wikipedia page
+url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+response = requests.get(url)
+
+data = response.json()
+
+# Extract the title and store it in 'guess'
+word = data["title"]
 
 hangman_stages = [
     """
@@ -68,7 +76,6 @@ hangman_stages = [
     """
 ]
 
-word = random.choice(words)
 guessed = []
 wrong = 0
 display = ["_"] * len(word)
