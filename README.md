@@ -12,4 +12,5 @@ We also want to expand our ability to generate visuals by including a graphical 
 3. Update the visual display based on whether the guess is correct or incorrect
 4. Loop the game until the player either wins or loses
 
-##Breaking it Down - FP 
+## Breaking it Down - FP
+1. 
