@@ -85,7 +85,6 @@ hangman_stages = [
 
 guessed = []
 wrong = 0
-display = ["_"] * len(word)
 
 print("Welcome to Hangman!")
 
@@ -106,7 +105,7 @@ while wrong < 6 and "_" in display:
 
     guessed.append(guess)
 
-    if guess in word:
+    if guess in [c for c in word if c.isalpha()]:
         for i in range(len(word)):
             if word[i] == guess:
                 display[i] = guess
