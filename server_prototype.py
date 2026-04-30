@@ -31,3 +31,7 @@ else:
 print("Player 1:", p1_score)
 print("Player 2:", p2_score)
 print("Winner:", winner)
+
+client.sendall(json.dumps({
+    "wrong": wrong
+}))
