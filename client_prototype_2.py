@@ -96,19 +96,21 @@ while wrong < 6 and "_" in display:
         continue
 
     if guess in guessed:
-        print("You already guessed that.")
         continue
 
     guessed.append(guess)
 
-    if guess in [c for c in word if c.isalpha()]:
+    if guess in word:
         for i in range(len(word)):
             if word[i] == guess:
                 display[i] = guess
         print("Good guess!")
+    else:
+        wrong += 1
+        print("Wrong guess!")
 
     if "_" not in display:
-        break  # STOP IMMEDIATELY
+        break
 
     else:
         wrong += 1
