@@ -18,8 +18,9 @@ UPDATE: For our final project, we have created a Hangman game with three modes(w
 8. Loop the game until the player either wins or loses
 
 ### External Contributions
-- 
-- (Chatgpt)
+- Movie API (https://www.reddit.com/r/learnprogramming/comments/zst0vp/api_for_getting_movies_actors_tv_shows_etc/)
+- TV API (Chatgpt) - We prompted AI to help us find accessible APIs so we can grab random TV show names for our game
+- Wikipedia 
 
 ## Breaking it Down - Status(old)
 1. Run using: python3 prototype_2.py
