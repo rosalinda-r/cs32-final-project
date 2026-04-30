@@ -1,36 +1,79 @@
+import socket
 import random
-from socket32 import create_new_socket
+import json
+import re
+import requests
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+HOST = "localhost"
+PORT = 5555
 
-def main():
-    with create_new_socket() as s:
-        # Bind socket to address and publish contact info
-        s.bind(HOST, PORT)
-        s.listen()
-        print("HANGMAN server started. Listening on", (HOST, PORT))
-        words = ['cosmo', 'wanda', 'waldo', 'odlaw', 'cat', 'hat', 'tuple', 'roshambo', 'list', 'coarsen']
+def get_wiki():
+    url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+    headers = {"User-Agent": "HangmanProject/1.0"}
 
-        # Answer incoming connection
-        conn2client, addr = s.accept()
-        print('Connected by', addr)
+    data = requests.get(url, headers=headers).json()
+    return data["title"].lower()
 
-        with conn2client:
-            while True:   # message processing loop
-                word = conn2client.recv()
-                if word == '':
-                    break
-                word = str(words)
+def init_display(word):
+    return ["_" if c.isalpha() else c for c in word]
 
-                # Generate a random shape to send back to client
-                # Create a secret for this connection
-                option = random.choice(words)
-                conn2client.sendall(option)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind((HOST, PORT))
+server.listen(2)
 
+print("Waiting for players...")
+p1, addr1 = server.accept()
+print("Player 1 connected")
 
+p2, addr2 = server.accept()
+print("Player 2 connected")
 
-            print('Disconnected')
+word = get_wiki()
+display = init_display(word)
 
-if __name__ == '__main__':
-    main()
+scores = {
+    "p1": 0,
+    "p2": 0
+}
+
+players = [p1, p2]
+names = ["p1", "p2"]
+
+turn = 0
+
+while "_" in display:
+    player = players[turn % 2]
+    name = names[turn % 2]
+
+    # send state
+    msg = json.dumps({
+        "display": display,
+        "score": scores,
+        "your_turn": name
+    })
+    player.send(msg.encode())
+
+    # receive guess
+    guess = player.recv(1024).decode().lower()
+
+    if guess not in word:
+        scores[name] += 1
+
+    # update display
+    for i, c in enumerate(word):
+        if c == guess:
+            display[i] = guess
+
+    turn += 1
+
+result = json.dumps({
+    "final_word": word,
+    "scores": scores
+})
+
+p1.send(result.encode())
+p2.send(result.encode())
+
+p1.close()
+p2.close()
+server.close()
