@@ -17,6 +17,9 @@ UPDATE: For our final project, we have created a Hangman game with three modes(w
 7. Update the 'man' based on whether the guess is correct or incorrect,
 8. Loop the game until the player either wins or loses
 
+### Works Cited
+- Chatgpt
+
 ## Breaking it Down - Status(old)
 1. Run using: python3 prototype_2.py
 2. 'Scrape' a random wikipedia article, using wikipedia's built-in random URL
