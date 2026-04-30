@@ -24,14 +24,34 @@ def get_book():
     books = data["items"]
     return books[0]["volumeInfo"]["title"].lower()
 
+def get_song():
+    url = "https://itunes.apple.com/search"
+
+    params = {
+        "term": "music",
+        "media": "music",
+        "entity": "song",
+        "limit": 50
+    }
+
+    response = requests.get(url, params=params)
+    data = response.json()
+
+    if "results" not in data or len(data["results"]) == 0:
+        return "blank space"  # fallback
+
+    song = random.choice(data["results"])
+    return song["trackName"].lower()
+
 mode = input("Choose mode: ")
 '''
 if mode == "movie":
     word = get_movie()
-elif mode == "song":
-    word = get_song()
 '''
-if mode == "book":
+if mode == "song":
+    word = get_song()
+
+elif mode == "book":
     word = get_book()
 else:
     word = get_wiki()
