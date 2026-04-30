@@ -18,9 +18,6 @@ def get_book():
     url = "https://www.googleapis.com/books/v1/volumes?q=fiction"
     data = requests.get(url).json()
 
-    if "items" not in data:
-        return "harry potter"  # fallback
-
     books = data["items"]
     return books[0]["volumeInfo"]["title"].lower()
 
