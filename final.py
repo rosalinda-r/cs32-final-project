@@ -10,6 +10,7 @@ def get_wiki():
 
     response = requests.get(url, headers=headers)
     # Extract the title and store it in 'title'
+    data = response.json()
     title = data["title"]
     word = title.lower()
 
@@ -23,12 +24,13 @@ def get_book():
     word = books[0]["volumeInfo"]["title"].lower()
 
 mode = input("Choose mode: ")
-
+'''
 if mode == "movie":
     word = get_movie()
 elif mode == "song":
     word = get_song()
-elif mode == "book":
+'''
+if mode == "book":
     word = get_book()
 else:
     word = get_wiki()
