@@ -43,7 +43,16 @@ def get_song():
     song = random.choice(data["results"])
     return song["trackName"].lower()
 
-mode = input("Choose mode: ")
+def choose_mode():
+    while True:
+        mode = input("Choose mode (wiki/book/song): ").lower()
+
+        if mode in ["wiki", "book", "song"]:
+            return mode
+
+        print("Invalid mode. Please enter: wiki, book, or song.\n")
+
+mode = choose_mode()
 '''
 if mode == "movie":
     word = get_movie()
