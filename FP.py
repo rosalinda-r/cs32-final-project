@@ -29,7 +29,12 @@ word = title.lower()
 
 ###NEW CODE
 def get_book():
-    
+
+    url = "https://www.googleapis.com/books/v1/volumes?q=fiction"
+    data = requests.get(url).json()
+
+    books = data["items"]
+    word = books[0]["volumeInfo"]["title"].lower()
 
 mode = input("Choose mode: ")
 
