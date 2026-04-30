@@ -1,79 +1,50 @@
-import socket
-import random
+from socket32 import create_new_socket
 import json
-import re
-import requests
 
-HOST = "localhost"
-PORT = 5555
-
-def get_wiki():
-    url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
-    headers = {"User-Agent": "HangmanProject/1.0"}
-
-    data = requests.get(url, headers=headers).json()
-    return data["title"].lower()
-
-def init_display(word):
-    return ["_" if c.isalpha() else c for c in word]
-
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((HOST, PORT))
-server.listen(2)
+server = create_new_socket()
+server.bind("127.0.0.1", 5555)
+server.listen()
 
 print("Waiting for players...")
 p1, addr1 = server.accept()
-print("Player 1 connected")
-
 p2, addr2 = server.accept()
-print("Player 2 connected")
 
-word = get_wiki()
-display = init_display(word)
+print("Players connected!")
 
-scores = {
-    "p1": 0,
-    "p2": 0
-}
+word = "hello world"  # later replace with wiki/book/song
+display = ["_" if c.isalpha() else c for c in word]
 
-players = [p1, p2]
-names = ["p1", "p2"]
-
+scores = {"p1": 0, "p2": 0}
 turn = 0
 
+players = [p1, p2]
+
 while "_" in display:
-    player = players[turn % 2]
-    name = names[turn % 2]
+    current = players[turn % 2]
+    player_name = "p1" if turn % 2 == 0 else "p2"
 
     # send state
-    msg = json.dumps({
+    current.sendall(json.dumps({
         "display": display,
-        "score": scores,
-        "your_turn": name
-    })
-    player.send(msg.encode())
+        "scores": scores,
+        "your_turn": player_name
+    }))
 
-    # receive guess
-    guess = player.recv(1024).decode().lower()
+    guess = current.recv().lower()
 
     if guess not in word:
-        scores[name] += 1
-
-    # update display
-    for i, c in enumerate(word):
-        if c == guess:
-            display[i] = guess
+        scores[player_name] += 1
+    else:
+        for i, c in enumerate(word):
+            if c == guess:
+                display[i] = guess
 
     turn += 1
 
-result = json.dumps({
+result = {
     "final_word": word,
     "scores": scores
-})
+}
 
-p1.send(result.encode())
-p2.send(result.encode())
-
-p1.close()
-p2.close()
-server.close()
+p1.sendall(json.dumps(result))
+p2.sendall(json.dumps(result))

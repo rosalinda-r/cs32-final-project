@@ -1,24 +1,19 @@
-import socket
+from socket32 import create_new_socket
 import json
 
-HOST = "localhost"
-PORT = 5555
-
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT))
+client = create_new_socket()
+client.connect("127.0.0.1", 5555)
 
 while True:
-    data = client.recv(4096).decode()
-    state = json.loads(data)
+    data = json.loads(client.recv())
 
-    print("\nWord:", " ".join(state["display"]))
-    print("Scores:", state["score"])
-    print("Your turn:", state["your_turn"])
+    print("\nWord:", " ".join(data["display"]))
+    print("Scores:", data["scores"])
+    print("You are:", data["your_turn"])
 
-    if "final_word" in state:
-        print("\nGame Over!")
-        print("Word was:", state["final_word"])
+    if "final_word" in data:
+        print("\nGame over! Word was:", data["final_word"])
         break
 
     guess = input("Enter letter: ")
-    client.send(guess.encode())
+    client.sendall(guess)
