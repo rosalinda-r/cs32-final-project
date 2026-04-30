@@ -106,6 +106,10 @@ while wrong < 6 and "_" in display:
             if word[i] == guess:
                 display[i] = guess
         print("Good guess!")
+
+    if "_" not in display:
+        break  # STOP IMMEDIATELY
+
     else:
         wrong += 1
         print("Wrong guess!")
@@ -116,3 +120,6 @@ else:
     print(hangman_stages[wrong])
     print("\nYou lost! The word was", word)
 
+client.sendall(json.dumps({
+    "wrong": wrong
+}))
