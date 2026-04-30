@@ -1,5 +1,5 @@
-import re
 import requests
+import random
 def get_wiki():
     url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
 
