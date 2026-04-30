@@ -14,16 +14,16 @@ def get_wiki():
     return title.lower()
 
 ###NEW CODE
-def get_book():
-    queries = ["fiction", "mystery", "fantasy", "science", "history"]
+def get_tv():
+    url = "https://api.tvmaze.com/shows"
 
-    for _ in range(2):  # try twice before fallback
-        q = random.choice(queries)
-        url = f"https://www.googleapis.com/books/v1/volumes?q={q}"
-        data = requests.get(url).json()
+    response = requests.get(url)
+    data = response.json()
 
-        if "items" in data and len(data["items"]) > 0:
-            return random.choice(data["items"])["volumeInfo"]["title"].lower()
+    show = random.choice(data)
+    title = show["name"].lower()
+
+    return title
 
 def get_song():
     url = "https://itunes.apple.com/search"
@@ -48,18 +48,18 @@ def choose_mode():
     while True:
         mode = input("Choose mode (wiki/book/song): ").lower()
 
-        if mode in ["wiki", "book", "song"]:
+        if mode in ["wiki", "tv", "song"]:
             return mode
 
-        print("Invalid mode. Please enter: wiki, book, or song.\n")
+        print("Invalid mode. Please enter: wiki, tv, or song.\n")
 
 mode = choose_mode()
 
 if mode == "song":
     word = get_song()
 
-elif mode == "book":
-    word = get_book()
+elif mode == "tv":
+    word = get_tv()
 else:
     word = get_wiki()
 ####
