@@ -1,7 +1,6 @@
 import re
 import requests
 def get_wiki():
-    # Get a random Wikipedia page
     url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
 
     headers = {
@@ -9,10 +8,10 @@ def get_wiki():
     }
 
     response = requests.get(url, headers=headers)
-    # Extract the title and store it in 'title'
     data = response.json()
+
     title = data["title"]
-    word = title.lower()
+    return title.lower()
 
 ###NEW CODE
 def get_book():
