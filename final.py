@@ -15,12 +15,14 @@ def get_wiki():
 
 ###NEW CODE
 def get_book():
-
     url = "https://www.googleapis.com/books/v1/volumes?q=fiction"
     data = requests.get(url).json()
 
+    if "items" not in data:
+        return "harry potter"  # fallback
+
     books = data["items"]
-    word = books[0]["volumeInfo"]["title"].lower()
+    return books[0]["volumeInfo"]["title"].lower()
 
 mode = input("Choose mode: ")
 '''
