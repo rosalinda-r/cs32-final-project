@@ -15,11 +15,15 @@ def get_wiki():
 
 ###NEW CODE
 def get_book():
-    url = "https://www.googleapis.com/books/v1/volumes?q=fiction"
-    data = requests.get(url).json()
+    queries = ["fiction", "mystery", "fantasy", "science", "history"]
 
-    books = data["items"]
-    return random.choice(books)["volumeInfo"]["title"].lower()
+    for _ in range(2):  # try twice before fallback
+        q = random.choice(queries)
+        url = f"https://www.googleapis.com/books/v1/volumes?q={q}"
+        data = requests.get(url).json()
+
+        if "items" in data and len(data["items"]) > 0:
+            return random.choice(data["items"])["volumeInfo"]["title"].lower()
 
 def get_song():
     url = "https://itunes.apple.com/search"
