@@ -6,45 +6,29 @@ server.bind("127.0.0.1", 5555)
 server.listen()
 
 print("Waiting for players...")
-p1, addr1 = server.accept()
-p2, addr2 = server.accept()
 
-print("Players connected!")
+p1, _ = server.accept()
+p2, _ = server.accept()
 
-word = "hello world"  # later replace with wiki/book/song
-display = ["_" if c.isalpha() else c for c in word]
+word = "hello world"  # replace with wiki/book/song
 
-scores = {"p1": 0, "p2": 0}
-turn = 0
+p1.sendall(json.dumps({"word": word}))
+p2.sendall(json.dumps({"word": word}))
 
-players = [p1, p2]
+p1_result = json.loads(p1.recv())
+p2_result = json.loads(p2.recv())
 
-while "_" in display:
-    current = players[turn % 2]
-    player_name = "p1" if turn % 2 == 0 else "p2"
+p1_score = p1_result["wrong"]
+p2_score = p2_result["wrong"]
 
-    # send state
-    current.sendall(json.dumps({
-        "display": display,
-        "scores": scores,
-        "your_turn": player_name
-    }))
+if p1_score < p2_score:
+    winner = "Player 1"
+elif p2_score < p1_score:
+    winner = "Player 2"
+else:
+    winner = "Tie"
 
-    guess = current.recv().lower()
+print("Player 1:", p1_score)
+print("Player 2:", p2_score)
+print("Winner:", winner)
 
-    if guess not in word:
-        scores[player_name] += 1
-    else:
-        for i, c in enumerate(word):
-            if c == guess:
-                display[i] = guess
-
-    turn += 1
-
-result = {
-    "final_word": word,
-    "scores": scores
-}
-
-p1.sendall(json.dumps(result))
-p2.sendall(json.dumps(result))
