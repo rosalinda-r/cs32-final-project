@@ -1,31 +1,17 @@
 import re
 import requests
+def get_wiki():
+    # Get a random Wikipedia page
+    url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
 
-# Get a random Wikipedia page
-url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+    headers = {
+        "User-Agent": "HangmanProject/1.0 (student project)"
+    }
 
-headers = {
-    "User-Agent": "HangmanProject/1.0 (student project)"
-}
-
-response = requests.get(url, headers=headers)
-
-if response.status_code != 200:
-    print("Error fetching data:", response.status_code)
-    print(response.text[:200])
-    exit()
-
-try:
-    data = response.json()
-except requests.exceptions.JSONDecodeError:
-    print("Invalid response from Wikipedia")
-    print(response.text)
-    exit()
-
-# Extract the title and store it in 'title'
-title = data["title"]
-
-word = title.lower()
+    response = requests.get(url, headers=headers)
+    # Extract the title and store it in 'title'
+    title = data["title"]
+    word = title.lower()
 
 ###NEW CODE
 def get_book():
