@@ -18,7 +18,7 @@ def get_wiki_word():
 # SERVER SETUP
 # ----------------------------
 server = create_new_socket()
-server.bind("127.0.0.1", 5555)
+server.bind("127.0.0.1", 6666)
 server.listen()
 
 print("Waiting for players...")
