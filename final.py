@@ -19,7 +19,7 @@ def get_book():
     data = requests.get(url).json()
 
     books = data["items"]
-    return books[0]["volumeInfo"]["title"].lower()
+    return random.choice(books)["volumeInfo"]["title"].lower()
 
 def get_song():
     url = "https://itunes.apple.com/search"
