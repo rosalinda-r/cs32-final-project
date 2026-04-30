@@ -5,11 +5,11 @@ OLD: For our final project, we would like to create a computer vs. player game o
 
 OLD: For our final project, we are creating a Hangman game that uses random articles titles from Wikipedia as the secret word.
 
-UPDATE: For our final project, we have created a Hangman game with three modes(wiki, book, song), that uses three API's to to grab words/phrases as the secret word.
+UPDATE: For our final project, we have created a Hangman game with three modes(wiki, tv, song), that uses three API's to to grab words/phrases as the secret word.
 
 ##  Breaking it Down - Final
 1. Run using: python3 prototype_2.py
-2. Choose a game mode (wiki, book, song)
+2. Choose a game mode (wiki, tv, song)
 3. 'Scrape' one of the three websites depending on mode, pick a random title for game
 4. Extract and clean up the title by removing punctuation
 5. Display the Title including punctuation but only require guesses for letters
@@ -18,6 +18,7 @@ UPDATE: For our final project, we have created a Hangman game with three modes(w
 8. Loop the game until the player either wins or loses
 
 ### External Contributions
+- 
 - (Chatgpt)
 
 ## Breaking it Down - Status(old)
