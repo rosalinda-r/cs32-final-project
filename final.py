@@ -53,10 +53,7 @@ def choose_mode():
         print("Invalid mode. Please enter: wiki, book, or song.\n")
 
 mode = choose_mode()
-'''
-if mode == "movie":
-    word = get_movie()
-'''
+
 if mode == "song":
     word = get_song()
 
